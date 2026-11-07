@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أصالة التراث المصري | متحف الإنتيك والتحف الملكية العالمية</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --wine:#4a1620;
+  --wine-deep:#2a0d12;
+  --gold:#c4a76b;
+  --gold-light:#e3cc96;
+  --ivory:#f7f1e3;
+  --ivory-soft:#fbf7ee;
+  --ink:#2a2320;
+  --muted:#7b6f63;
+  --line:rgba(196,167,107,.3);
+  --radius:24px;
+  --shadow:0 25px 60px rgba(42,13,18,0.25);
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Cairo',sans-serif}
+html{scroll-behavior:smooth}
+body{background:var(--ivory);color:var(--ink);line-height:1.9;overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:inherit;border:none}
+h1,h2,h3{font-family:'Amiri',serif;color:var(--wine-deep)}
+
+/* الشريط العلوي */
+.museum-topbar{background:var(--wine-deep);color:var(--gold-light);text-align:center;padding:12px 20px;font-size:14px;font-weight:700;letter-spacing:1px;border-bottom:1px solid rgba(196,167,107,0.3)}
+.header{position:sticky;top:0;z-index:100;background:rgba(247,241,227,0.97);backdrop-filter:blur(15px);border-bottom:1px solid var(--line);padding:15px 40px;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:15px}
+.brand-logo{width:70px;height:70px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;background:var(--ivory-soft);box-shadow:0 4px 15px rgba(196,167,107,0.3)}
+.brand-text h1{font-size:24px;color:var(--wine-deep);line-height:1.2}
+.brand-text span{font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;display:block}
+
+.nav{display:flex;gap:30px;font-weight:700;font-size:16px;color:var(--wine)}
+.nav a:hover{color:var(--gold)}
+
+/* البطل Hero */
+.hero{position:relative;height:88vh;min-height:620px;border-radius:var(--radius);overflow:hidden;margin:30px auto;max-width:1450px;background:var(--wine-deep);display:flex;align-items:flex-end;box-shadow:var(--shadow)}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.75;filter:contrast(1.1)}
+.hero-overlay{position:relative;z-index:10;width:100%;padding:90px 70px;color:#fff;background:linear-gradient(0deg,rgba(42,13,18,0.95) 0%,rgba(42,13,18,0.5) 60%,transparent 100%)}
+.hero-sub{color:var(--gold-light);font-size:17px;font-weight:700;letter-spacing:3px;margin-bottom:12px;display:block}
+.hero h2{font-size:clamp(36px,5vw,58px);color:#fff;margin-bottom:20px;text-shadow:0 4px 25px rgba(0,0,0,0.8);line-height:1.3}
+.hero p{font-size:19px;max-width:800px;opacity:0.95;margin-bottom:35px;color:var(--ivory)}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:16px 38px;border-radius:50px;font-weight:700;transition:0.3s;font-size:17px}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--wine-deep);box-shadow:0 10px 30px rgba(196,167,107,0.4)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 15px 45px rgba(196,167,107,0.6)}
+
+/* شريط الثقة */
+.museum-trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));background:var(--ivory-soft);border:1px solid var(--line);border-radius:var(--radius);max-width:1450px;margin:0 auto 70px;padding:35px;gap:25px;box-shadow:var(--shadow)}
+.trust-item{display:flex;gap:18px;align-items:center}
+.trust-item .icon{font-size:42px}
+.trust-item h3{font-size:17px;margin-bottom:4px;color:var(--wine-deep)}
+.trust-item p{font-size:14px;color:var(--muted)}
+
+.section-title{text-align:center;margin:60px 0 30px}
+.section-title h2{font-size:36px;color:var(--wine-deep);margin-bottom:10px}
+.section-title p{color:var(--muted);font-size:16px}
+
+/* الفلترة */
+.filter-bar{max-width:1450px;margin:0 auto 35px;padding:0 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.search-input{padding:14px 22px;border-radius:30px;border:1px solid var(--line);width:320px;background:#fff;font-size:15px}
+.cat-pills{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px;max-width:100%}
+.cat-pill{background:#fff;border:1px solid var(--line);padding:10px 20px;border-radius:25px;font-size:14px;font-weight:bold;color:var(--wine);cursor:pointer;white-space:nowrap;transition:0.3s}
+.cat-pill.active, .cat-pill:hover{background:var(--wine);color:#fff}
+
+/* شبكة المنتجات */
+.products-grid{max-width:1450px;margin:0 auto;padding:0 24px 50px;display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:40px}
+.product-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:0.4s;display:flex;flex-direction:column;border:1px solid var(--line);cursor:pointer}
+.product-card:hover{transform:translateY(-12px);box-shadow:0 35px 70px rgba(42,13,18,0.25)}
+.product-img{height:340px;position:relative;overflow:hidden;background:#efe6d3}
+.product-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s}
+.product-card:hover .product-img img{transform:scale(1.08)}
+.badge{position:absolute;top:18px;right:18px;color:#fff;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700;box-shadow:0 4px 10px rgba(0,0,0,0.2)}
+.product-info{padding:28px;display:flex;flex-direction:column;flex:1}
+.royal-tag{color:var(--gold);font-size:14px;font-weight:700;margin-bottom:8px}
+.product-info h3{font-size:23px;margin-bottom:10px;line-height:1.3}
+.product-info p{font-size:15px;color:var(--muted);margin-bottom:18px;flex:1}
+.product-price{font-size:26px;font-weight:900;color:var(--wine);margin-bottom:20px;font-family:'Amiri',serif}
+.btn-wa{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;display:flex;justify-content:center;align-items:center;gap:10px;padding:15px;border-radius:14px;font-weight:700;transition:0.3s;font-size:16px;width:100%}
+.btn-wa:hover{opacity:0.9}
+
+/* Modal */
+.product-modal{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:2500;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(10px)}
+.product-modal.open{display:flex}
+.modal-box{background:#fff;border-radius:var(--radius);max-width:950px;width:100%;max-height:92vh;overflow-y:auto;position:relative;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 40px 90px rgba(0,0,0,0.6)}
+@media(max-width:768px){.modal-box{grid-template-columns:1fr}}
+.modal-close{position:absolute;top:18px;left:18px;background:#333;color:#fff;width:40px;height:40px;border-radius:50%;font-size:20px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10}
+.modal-img-con{background:#efe6d3;min-height:320px;display:flex;align-items:center;justify-content:center}
+.modal-img-con img{width:100%;height:100%;object-fit:cover}
+.modal-details{padding:35px;display:flex;flex-direction:column;justify-content:space-between}
+.modal-details h2{font-size:26px;color:var(--wine-deep);margin-bottom:10px}
+.modal-details .price{font-size:24px;font-weight:900;color:var(--wine);margin:12px 0;font-family:'Amiri',serif}
+
+.checkout-form{margin-top:20px;border-top:1px solid var(--line);padding-top:20px}
+.checkout-form input, .checkout-form select{width:100%;padding:12px;margin-bottom:12px;border:1px solid #ddd;border-radius:10px;font-size:15px;background:#faf6f0}
+
+.delivery-section{max-width:1450px;margin:70px auto;padding:0 24px}
+.delivery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.delivery-card{background:#fff;padding:30px;border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.delivery-card h3{font-size:22px;color:var(--wine-deep);margin-bottom:18px}
+.delivery-card ul{list-style:none}
+.delivery-card ul li{margin-bottom:10px;position:relative;padding-right:15px}
+.delivery-card ul li::before{content:"•";color:var(--gold);position:absolute;right:0;font-weight:bold}
+
+.story-section{background:var(--wine-deep);color:#fff;padding:80px 24px;margin:60px 0;text-align:center}
+.story-box{max-width:900px;margin:0 auto}
+.story-box h2{font-size:36px;color:var(--gold-light);margin-bottom:20px}
+.story-box p{font-size:17px;line-height:2.2;opacity:0.95}
+
+.footer{background:var(--wine-deep);color:#fff;padding:90px 24px 35px;border-top:1px solid rgba(196,167,107,0.4)}
+.footer-content{max-width:1450px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:45px;margin-bottom:60px}
+.footer h4{color:var(--gold-light);font-size:20px;margin-bottom:22px}
+.footer p, .footer a{color:rgba(255,255,255,0.88);font-size:16px;margin-bottom:12px;display:block}
+.footer a:hover{color:var(--gold)}
+.admin-trigger{display:inline-block;margin-top:18px;color:var(--gold);border:1px dashed var(--gold);padding:10px 22px;border-radius:35px;cursor:pointer;font-size:14px}
+.admin-trigger:hover{background:var(--gold);color:var(--wine-deep)}
+.footer-copy{text-align:center;border-top:1px solid rgba(255,255,255,0.12);padding-top:30px;font-size:14px;color:rgba(255,255,255,0.6)}
+
+.wa-float{position:fixed;bottom:35px;left:35px;width:70px;height:70px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 35px rgba(37,211,102,0.6);z-index:99;transition:0.3s}
+.wa-float:hover{transform:scale(1.12)}
+.wa-float svg{width:38px;height:38px;fill:#fff}
+
+.admin-modal{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:3000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(10px)}
+.admin-modal.open{display:flex}
+.admin-box{background:#fff;border-radius:var(--radius);max-width:1150px;width:100%;max-height:92vh;overflow-y:auto;padding:45px;color:#222;position:relative;box-shadow:0 40px 90px rgba(0,0,0,0.6)}
+.admin-close{position:absolute;top:22px;left:22px;background:#333;color:#fff;width:40px;height:40px;border-radius:50%;font-size:20px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.admin-tabs{display:flex;gap:10px;margin-bottom:30px;flex-wrap:wrap;border-bottom:2px solid #eee;padding-bottom:15px}
+.admin-tab-btn{background:#f1ecdf;border:none;padding:10px 18px;border-radius:8px;font-weight:bold;cursor:pointer;color:var(--wine)}
+.admin-tab-btn.active{background:var(--wine);color:#fff}
+.admin-tab-content{display:none}
+.admin-tab-content.active{display:block}
+.form-control{width:100%;padding:14px;margin-bottom:16px;border:1px solid #ddd;border-radius:10px;font-size:15px;background:#faf6f0}
+.btn-admin{background:var(--wine);color:#fff;padding:14px 25px;border-radius:10px;font-weight:bold;cursor:pointer;font-size:16px;width:100%}
+.btn-danger{background:#c0392b;color:#fff;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:bold}
+.btn-edit{background:var(--gold);color:var(--wine-deep);padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:bold;margin-left:8px}
+.admin-product-row{display:flex;justify-content:space-between;align-items:center;background:#faf6f0;padding:15px;border-radius:10px;margin-bottom:12px;border:1px solid #eae5de}
+
+@media(max-width:768px){.nav{display:none}.hero{height:72vh}.hero-overlay{padding:45px 22px}}
+</style>
+</head>
+<body>
+
+<div class="museum-topbar" id="topbarText">🏛️ متحف أصالة التراث — تحف ملكية وإنتيكات عالمية من قلب مصر إلى الكويت والخليج والعالم</div>
+
+<header class="header">
+  <div class="brand">
+    <img id="brandLogo" class="brand-logo" src="logo.jpg" alt="لوجو المتحف">
+    <div class="brand-text">
+      <h1 id="storeName">أصالة التراث المصري</h1>
+      <span id="sloganText">عاشق ومعشوق — متحف الإنتيك والتحف الملكية الأصيلة ✨ صُنع في مصر</span>
+    </div>
+  </div>
+  <nav class="nav">
+    <a href="#featured">درر المتحف</a>
+    <a href="#products">معرض المتحف الكامل</a>
+    <a href="#delivery">الشحن</a>
+    <a href="#story">حكاية الصنعة الملكية</a>
+    <a href="#contact">تواصل مع أمين المتحف</a>
+  </nav>
+</header>
+
+<section class="hero" id="heroSection">
+  <img src="cover.jpg" alt="غلاف متحف أصالة التراث">
+  <div class="hero-overlay">
+    <span class="hero-sub">تحف تاريخية تُقتنى… وتراث يُحكى</span>
+    <h2>متحف الإنتيك الملكي،<br>بين يديك في بيتك.</h2>
+    <p>نقدم لك أرقى القطع الفنية المستخرجة من عرق اللؤلؤ الأبيض وأفخم أخشاب الزان الروماني، بتطعيمات يدوية تنافس متاحف العالم.</p>
+    <a href="#featured" class="btn btn-gold">جولة في القاعات الملكية ←</a>
+  </div>
+</section>
+
+<!-- شريط الثقة -->
+<div class="museum-trust">
+  <div class="trust-item"><div class="icon">🏛️</div><div><h3>تصميم متحفي فاخر</h3><p>تحف فريدة مستوحاة من العصور الملكية</p></div></div>
+  <div class="trust-item"><div class="icon">🐚</div><div><h3>صدف بحري أصلي 100%</h3><p>أبيض لؤلؤي، أبالوني، وأسترالي نقي</p></div></div>
+  <div class="trust-item"><div class="icon">✋</div><div><h3>شغل يدوي عريق</h3><p>إبداع الحرفيين المصريين بدقة متناهية</p></div></div>
+  <div class="trust-item"><div class="icon">✈️</div><div><h3>شحن مؤمّن</h3><p>من مصر إلى الكويت، الخليج، وكل العالم</p></div></div>
+</div>
+
+<div class="section-title" id="featured">
+  <h2>🌟 درر المتحف الملكية</h2>
+  <p>أبرز المعروضات المتحفية المختارة خصيصاً لتزين واجهة قصرك.</p>
+</div>
+<div class="products-grid" id="featuredGrid"></div>
+
+<div class="section-title" id="products">
+  <h2>🏛️ قاعات المعرض الشامل — اختر القسم المناسب</h2>
+  <p>تصفح جميع تحف وإنتيكات المتحف مقسمة حسب القاعات والأقسام بكل سهولة.</p>
+</div>
+
+<div class="filter-bar">
+  <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن تحفة أو إنتيك..." oninput="filterProducts()">
+  <div class="cat-pills" id="catPills">
+    <button class="cat-pill active" onclick="setCategory('الكل', this)">جميع القاعات</button>
+    <button class="cat-pill" onclick="setCategory('ترابيزات', this)">ترابيزات</button>
+    <button class="cat-pill" onclick="setCategory('طاولات زهر وشطرنج', this)">طاولات زهر وشطرنج</button>
+    <button class="cat-pill" onclick="setCategory('صناديق وشكمجيات', this)">صناديق وشكمجيات</button>
+    <button class="cat-pill" onclick="setCategory('صواني تقديم', this)">صواني تقديم</button>
+    <button class="cat-pill" onclick="setCategory('مباخر', this)">مباخر</button>
+    <button class="cat-pill" onclick="setCategory('أثاث مكتبي', this)">أثاث مكتبي</button>
+    <button class="cat-pill" onclick="setCategory('لوحات قرآنية وبراويز', this)">لوحات قرآنية وبراويز</button>
+    <button class="cat-pill" onclick="setCategory('أثاث ملكي', this)">أثاث ملكي</button>
+    <button class="cat-pill" onclick="setCategory('ديكورات', this)">ديكورات</button>
+  </div>
+</div>
+
+<div class="products-grid" id="productsGrid"></div>
+<div class="pagination" id="paginationContainer" style="display:flex;justify-content:center;gap:8px;margin:30px 0;"></div>
+
+<!-- Modal تفاصيل التحفة والطلب -->
+<div class="product-modal" id="productModal" onclick="if(event.target === this) closeModal()">
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeModal()">✕</div>
+    <div class="modal-img-con" id="modalImgContainer">
+      <div style="font-size:80px;">🏛️</div>
+    </div>
+    <div class="modal-details">
+      <div>
+        <span class="royal-tag" id="modalRoyal">👑 درة متحفية</span>
+        <h2 id="modalTitle">اسم التحفة</h2>
+        <p id="modalDesc" style="color:var(--muted); font-size:15px; margin-bottom:10px;"></p>
+        <div id="modalStory" style="font-size:13px; color:var(--wine); margin-bottom:15px; font-weight:600;"></div>
+        <div class="price" id="modalPrice">0.000 د.ك</div>
+      </div>
+      
+      <div class="checkout-form">
+        <h4 style="font-size:16px; color:var(--wine); margin-bottom:10px;">📋 طلب حيازة التحفة المتحفية</h4>
+        <input type="text" id="clientName" placeholder="اسم الكريم *" required>
+        <input type="tel" id="clientPhone" placeholder="رقم الهاتف للتواصل *" required>
+        <input type="text" id="clientAddress" placeholder="المنطقة والعنوان (الكويت أو الدولة) *" required>
+        
+        <label style="font-size:14px; font-weight:bold; color:var(--wine); margin-bottom:5px; display:block;">🚚 اختر وجهة التوصيل:</label>
+        <select id="clientDelivery" class="form-control">
+          <option value="داخل الكويت">داخل الكويت</option>
+          <option value="خارج الكويت">خارج الكويت</option>
+          <option value="استلام من الفرع">استلام من الفرع</option>
+        </select>
+
+        <button class="btn-wa" onclick="submitOrderViaWa()">💬 اطلب الآن (يصل خلال 25 يوم)</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="delivery-section" id="delivery">
+  <div class="section-title" style="margin:20px 0;">
+    <h2>✈️ الشحن وتغليف القصور</h2>
+    <p>نصل بتحفتك إلى أي مكان في العالم بتغليف خشبي ملكي مضاد للصدمات</p>
+  </div>
+  <div class="delivery-grid">
+    <div class="delivery-card">
+      <h3>🇰🇼 داخل الكويت</h3>
+      <ul>
+        <li>المدة: 2 - 4 أيام عمل</li>
+        <li>توصيل لجميع المناطق</li>
+        <li>الدفع عند الاستلام</li>
+      </ul>
+    </div>
+    <div class="delivery-card">
+      <h3>✈️ دول الخليج</h3>
+      <ul>
+        <li>السعودية، الإمارات، قطر، عمان، البحرين</li>
+        <li>المدة: 10 - 15 يوم عمل</li>
+        <li>تغليف خشبي خاص</li>
+      </ul>
+    </div>
+    <div class="delivery-card">
+      <h3>🌍 الشحن الدولي</h3>
+      <ul>
+        <li>جميع أنحاء العالم</li>
+        <li>شحن جوي مؤمن</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="story-section" id="story">
+  <div class="story-box">
+    <h2>عاشق ومعشوق — حكاية فن التصديف العريق</h2>
+    <p>
+      تعد صناعة الصدف المصري (فن التصديف) واحدة من أعرق الحرف المحفوظة في المتاحف الكبرى. تعتمد على مزج خشب الزان الأصيل مع عرق اللؤلؤ الطبيعي المستخرج من البحار لإنتاج إنتيكات تحفة خالدة لا تزداد بمرور الزمن إلا قيمة وجمالاً.
+    </p>
+  </div>
+</section>
+
+<footer class="footer" id="contact">
+  <div class="footer-content">
+    <div>
+      <h4 id="footerName">أصالة التراث المصري</h4>
+      <p>متحف الإنتيك والتحف الملكية الأصيلة — صُنع بفخر في مصر ✨</p>
+      <span class="admin-trigger" onclick="openLoginModal()">⚙️ دخول لوحة التحكم (الادمن)</span>
+    </div>
+    <div>
+      <h4>تواصل مع أمين المتحف</h4>
+      <p>💬 واتساب: <a href="https://wa.me/96551118069" target="_blank">+965 51118069</a></p>
+      <p>📧 البريد: asalat.al.torath.Kw.Eg@GMAIL.COM</p>
+    </div>
+    <div>
+      <h4>قاعات العرض الرسمية</h4>
+      <a href="https://www.facebook.com/share/1ddcccaFpo/?mibextid=wwXIfr" target="_blank">📘 فيسبوك المتحف</a>
+      <a href="https://www.instagram.com/asalat.al.torath.kw.eg" target="_blank">📸 انستغرام التحف</a>
+      <a href="https://www.tiktok.com/@user1178392961513" target="_blank">🎵 تيك توك التراث</a>
+    </div>
+  </div>
+  <div class="footer-copy">© <span id="yearSpan"></span> أصالة التراث المصري — متحف الإنتيك والتحف الملكية. جميع الحقوق محفوظة.</div>
+</footer>
+
+<a href="https://wa.me/96551118069" target="_blank" class="wa-float">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- نافذة تسجيل دخول المشرف -->
+<div class="admin-modal" id="loginModal">
+  <div class="admin-box" style="max-width: 420px;">
+    <div class="admin-close" onclick="closeLoginModal()">✕</div>
+    <h3 style="color:var(--wine); margin-bottom: 20px; text-align:center;">👑 دخول أمين المتحف</h3>
+    <input type="email" id="adminEmailInput" class="form-control" placeholder="البريد الإلكتروني" value="admin@asala.com">
+    <input type="password" id="adminPassInput" class="form-control" placeholder="كلمة المرور" value="123456">
+    <button class="btn-admin" onclick="checkAdminLogin()">دخول لوحة التحكم</button>
+  </div>
+</div>
+
+<!-- لوحة التحكم الكاملة المدمجة -->
+<div class="admin-modal" id="adminPanelModal">
+  <div class="admin-box">
+    <div class="admin-close" onclick="closeAdminPanel()">✕</div>
+    <h2 style="color:var(--wine); margin-bottom: 20px;">🏛️ لوحة تحكم متحف أصالة التراث</h2>
+    
+    <div class="admin-tabs">
+      <button class="admin-tab-btn active" onclick="switchAdminTab(event, 'tab-prod')">1. التحف والمنتجات (<span id="tabProdBadge">28</span>)</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab(event, 'tab-hero')">2. غلاف المتحف</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab(event, 'tab-design')">3. التصميم والألوان</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab(event, 'tab-identity')">4. الهوية والشعار</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab(event, 'tab-backup')">5. النسخ الاحتياطي (GitHub Sync)</button>
+    </div>
+
+    <div id="tab-prod" class="admin-tab-content active">
+      <div id="formSection" style="background:#faf6f0; padding:20px; border-radius:12px; margin-bottom:25px; border:1px solid var(--line);">
+        <h3 id="formTitle" style="margin-bottom:15px; color:var(--wine)">➕ إضافة / تعديل تحفة متحفية</h3>
+        <input type="hidden" id="edit-id">
+        <input type="text" id="p-name" class="form-control" placeholder="اسم التحفة *">
+        <select id="p-cat" class="form-control">
+          <option value="ترابيزات">ترابيزات</option>
+          <option value="طاولات زهر وشطرنج">طاولات زهر وشطرنج</option>
+          <option value="صناديق وشكمجيات">صناديق وشكمجيات</option>
+          <option value="صواني تقديم">صواني تقديم</option>
+          <option value="مباخر">مباخر</option>
+          <option value="أثاث مكتبي">أثاث مكتبي</option>
+          <option value="لوحات قرآنية وبراويز">لوحات قرآنية وبراويز</option>
+          <option value="أثاث ملكي">أثاث ملكي</option>
+          <option value="ديكورات">ديكورات</option>
+        </select>
+        <input type="text" id="p-royal" class="form-control" placeholder="التصنيف الملكي (مثال: 👑 درة متحفية)">
+        <textarea id="p-desc" class="form-control" placeholder="الوصف المختصر"></textarea>
+        <textarea id="p-story" class="form-control" placeholder="قصة القطعة"></textarea>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+          <input type="text" id="p-price" class="form-control" placeholder="السعر الحالي (د.ك) *">
+          <input type="text" id="p-old" class="form-control" placeholder="السعر السابق (د.ك)">
+        </div>
+        <label style="font-size:13px; font-weight:bold; color:var(--wine); margin-bottom:5px; display:block;">🌟 عرض في واجهة المتحف (درر المتحف):</label>
+        <select id="p-featured" class="form-control">
+          <option value="no">لا</option>
+          <option value="yes">نعم (يثبت في الواجهة)</option>
+        </select>
+        
+        <label style="font-size:14px; font-weight:bold; color:var(--wine); margin-bottom:5px; display:block;">🖼️ صورة التحفة (مثال: 1.jpg):</label>
+        <input type="file" id="p-file" class="form-control" accept="image/*" onchange="handleProductFile(event)" style="background:#fff;">
+        <input type="text" id="p-image-val" class="form-control" placeholder="أو اسم ملف الصورة المحلية (مثال: 1.jpg)">
+
+        <label style="font-size:13px; font-weight:bold; color:var(--wine); margin-bottom:5px; display:block;">حالة التوافر:</label>
+        <select id="p-stock" class="form-control">
+          <option value="متوفر">متوفر</option>
+          <option value="قيد الشحن">قيد الشحن</option>
+          <option value="بالطلب">بالطلب</option>
+        </select>
+        <button class="btn-admin" onclick="saveProductData()">💾 حفظ التحفة المتحفية</button>
+      </div>
+      <div>
+        <h3>التحف المعروضة حالياً (<span id="prodCount">0</span>)</h3>
+        <div id="adminProductsList"></div>
+      </div>
+    </div>
+
+    <div id="tab-hero" class="admin-tab-content">
+      <h3>🎬 غلاف المتحف</h3>
+      <input type="file" class="form-control" accept="image/*" onchange="uploadHeroImage(event)">
+    </div>
+
+    <div id="tab-design" class="admin-tab-content">
+      <h3>🎨 ألوان المتحف الملكي</h3>
+      <label>اللون الرئيسي:</label><input type="color" id="colorWine" class="form-control" value="#4a1620">
+      <label>لون الذهب:</label><input type="color" id="colorGold" class="form-control" value="#c4a76b">
+      <button class="btn-admin" onclick="saveDesignColors()">💾 حفظ الألوان</button>
+    </div>
+
+    <div id="tab-identity" class="admin-tab-content">
+      <h3>🏺 شعار المتحف</h3>
+      <input type="file" class="form-control" accept="image/*" onchange="uploadLogoFile(event)">
+      <input type="text" id="editStoreName" class="form-control" placeholder="اسم المتحف">
+      <button class="btn-admin" onclick="saveStoreIdentity()">💾 حفظ</button>
+    </div>
+
+    <div id="tab-backup" class="admin-tab-content">
+      <h3>💾 النسخ الاحتياطي (GitHub Sync)</h3>
+      <button class="btn-admin" style="background:#27ae60; margin-bottom:20px;" onclick="exportDataFile()">📥 تصدير ملف داتا المتحف (JSON)</button>
+      <input type="file" class="form-control" accept=".json" onchange="importDataFile(event)">
+    </div>
+
+  </div>
+</div>
+
+<script>
+let adminCreds = JSON.parse(localStorage.getItem('asala_museum_admin_creds')) || { email: 'admin@asala.com', pass: '123456' };
+
+const museumDefaultProducts = [
+  {id:1, name:"طقم صواني الملكة نفرتيتي", cat:"صواني تقديم", royal:"👑 درة متحفية", desc:"طقم صواني تقديم فاخر مطعم بالصدف الطبيعي بتصميم نفرتيتي العريق.", story:"فخامة الضيافة الملكية بتفاصيل يدوية دقيقة.", price:"22.000 د.ك", oldPrice:"26.000 د.ك", stock:"متوفر", featured:"yes", image:"1.jpg"},
+  {id:2, name:"طقم صواني السلطان سليمان القانوني", cat:"صواني تقديم", royal:"👑 درة متحفية", desc:"صواني تقديم عريقة مشغولة بأفخم تطعيمات عرق اللؤلؤ.", story:"تراث سلاطين العصور الذهبية.", price:"24.000 د.ك", oldPrice:"28.000 د.ك", stock:"متوفر", featured:"yes", image:"2.jpg"},
+  {id:3, name:"ترابيزة بوف السلطان صلاح الدين", cat:"ترابيزات", royal:"👑 درة متحفية", desc:"ترابيزة بوف فخمة مطعمة بصدف أصلي وأرابيسك هندسي متقن.", story:"تحفة فنية تروي بطولات التاريخ.", price:"58.000 د.ك", oldPrice:"65.000 د.ك", stock:"قيد الشحن", featured:"yes", image:"4.jpg"},
+  {id:4, name:"ترابيزة سفرة الملك فاروق", cat:"ترابيزات", royal:"👑 درة متحفية", desc:"ترابيزة سفرة مصممة بطراز القصور الملكية العريقة.", story:"رقي وأناقة الملكية المصرية.", price:"55.000 د.ك", oldPrice:"62.000 د.ك", stock:"بالطلب", featured:"yes", image:"5.jpg"},
+  {id:5, name:"ترابيزة نجمة الملكة كليوباترا", cat:"ترابيزات", royal:"👑 درة متحفية", desc:"ترابيزة بنقشة النجمة الإسلامية وتطعيم مكثف لعرق اللؤلؤ.", story:"سحر النجوم وأصالة الفن المصري.", price:"50.500 د.ك", oldPrice:"58.000 د.ك", stock:"متوفر", featured:"yes", image:"6.jpg"},
+  {id:6, name:"طقم مكتب الملك فاروق", cat:"أثاث مكتبي", royal:"👑 درة متحفية", desc:"طقم مكتب متكامل مشغول يدوياً بخشب الزان والصدف.", story:"وقار المكاتب القيادية والملكية.", price:"51.500 د.ك", oldPrice:"60.000 د.ك", stock:"متوفر", featured:"no", image:"7.jpg"},
+  {id:7, name:"مبخر الملكة حتشبسوت", cat:"مباخر", royal:"👑 درة متحفية", desc:"مبخرة ساعة رملية مزخرفة بالصدف الطبيعي والأحجار الأصيلة.", story:"عبير العصور الملكية العريقة.", price:"25.000 د.ك", oldPrice:"30.000 د.ك", stock:"متوفر", featured:"yes", image:"8.jpg"},
+  {id:8, name:"كرسي محمد علي باشا", cat:"أثاث ملكي", royal:"👑 درة متحفية", desc:"كرسي فخم بطراز عريق، تطعيم كامل بالصدف ووسادة وثير.", story:"هيبة ورفاهية المجالس الكبرى.", price:"76.000 د.ك", oldPrice:"85.000 د.ك", stock:"قيد الشحن", featured:"yes", image:"9.jpg"},
+  {id:9, name:"طقم السلطان قايتباي", cat:"أثاث ملكي", royal:"👑 درة المتحف الكبرى", desc:"طقم جلسة ملكي متكامل مشغول بعرق اللؤلؤ وأرابيسك دمياط.", story:"قمة الإبداع الحرفي اليدوي.", price:"159.500 د.ك", oldPrice:"180.000 د.ك", stock:"بالطلب", featured:"yes", image:"10.jpg"},
+  {id:10, name:"شطرنج رمسيس الثاني", cat:"طاولات زهر وشطرنج", royal:"👑 درة متحفية", desc:"طاولة شطرنج وزهر بقطع عظم جمل خرط يدوي وبورد صدف.", story:"متعة الملوك الاستراتيجية.", price:"63.000 د.ك", oldPrice:"75.000 د.ك", stock:"متوفر", featured:"yes", image:"11.jpg"},
+  {id:11, name:"صندوق قبة مثمنة", cat:"صناديق وشكمجيات", royal:"👑 درة متحفية", desc:"صندوق قبة مثمنة فاخر بتطعيمات صدف وقرن جاموس أصلي.", story:"خزنة المقتنيات الثمينة.", price:"34.500 د.ك", oldPrice:"40.000 د.ك", stock:"متوفر", featured:"no", image:"13.jpg"},
+  {id:12, name:"صندوق مستطيل نقش", cat:"صناديق وشكمجيات", royal:"👑 درة متحفية", desc:"صندوق مستطيل بنقوش هندسية دقيقة وتطعيم صدف كامل.", story:"فن يدوية يعيش لأجيال.", price:"38.000 د.ك", oldPrice:"45.000 د.ك", stock:"متوفر", featured:"no", image:"14.jpg"},
+  {id:13, name:"صندوق مستطيل ورد", cat:"صناديق وشكمجيات", royal:"👑 درة متحفية", desc:"صندوق مزين برسومات ورود وزخارف صدفية بحرية.", story:"جمال الطبيعة مجسداً بالحرفة.", price:"38.000 د.ك", oldPrice:"45.000 د.ك", stock:"متوفر", featured:"no", image:"15.jpg"},
+  {id:14, name:"صندوق بومبيه", cat:"صناديق وشكمجيات", royal:"👑 درة متحفية", desc:"صندوق بتصميم بومبيه محدب وتطعيم صدف نقي.", story:"أناقة الكلاسيكيات العريقة.", price:"34.500 د.ك", oldPrice:"40.000 د.ك", stock:"متوفر", featured:"no", image:"16.jpg"},
+  {id:15, name:"علبة قبة شامي", cat:"صناديق وشكمجيات", royal:"👑 درة متحفية", desc:"علبة قبة بنقوش دمشقية ومصرية ممزوجة بصدف أبيض وأزرق أبالوني.", story:"تلاقح الفنون الإسلامية.", price:"31.000 د.ك", oldPrice:"36.000 د.ك", stock:"متوفر", featured:"no", image:"17.jpg"},
+  {id:16, name:"علبة بومبيه أبيض", cat:"صناديق وشكمجيات", royal:"👑 درة متحفية", desc:"علبة بومبيه مطعمة بالصدف الأبيض وخيوط النحاس.", story:"لمسات معدنية ساحرة.", price:"34.500 د.ك", oldPrice:"40.000 د.ك", stock:"متوفر", featured:"no", image:"19.jpg"},
+  {id:17, name:"صندوق مثمن بيضاوي", cat:"صناديق وشكمجيات", royal:"👑 درة متحفية", desc:"صندوق بيضاوي فاخر مرصع بالصدف الأسترالي البراق.", story:"بريق البحار العالمية في بيتك.", price:"38.000 د.ك", oldPrice:"45.000 د.ك", stock:"متوفر", featured:"no", image:"20.jpg"},
+  {id:18, name:"صندوق مخدة مستطيلة", cat:"صناديق وشكمجيات", royal:"👑 درة متحفية", desc:"صندوق بتصميم مخدة مستطيلة مزخرفة بالصدف والنحاس الأصفر.", story:"تراث الأجداد بروح عصرية.", price:"34.500 د.ك", oldPrice:"40.000 د.ك", stock:"متوفر", featured:"no", image:"21.jpg"},
+  {id:19, name:"طقم مكتب كامل 13 قطعة", cat:"أثاث مكتبي", royal:"👑 درة متحفية", desc:"طقم مكتب سلطاني متكامل مكون من 13 قطعة مرصعة بالصدف.", story:"رفاهية العمل القيادي.", price:"86.000 د.ك", oldPrice:"98.000 د.ك", stock:"متوفر", featured:"yes", image:"33.jpg"},
+  {id:20, name:"برواز سورة الفلق", cat:"لوحات قرآنية وبراويز", royal:"👑 درة متحفية", desc:"برواز قرآني دائري سورة الفلق بتطعيم صدف بحري نقي.", story:"بركة القرآن وجمال الفن.", price:"21.000 د.ك", oldPrice:"25.000 د.ك", stock:"متوفر", featured:"no", image:"35.jpg"},
+  {id:21, name:"برواز آية الكرسي", cat:"لوحات قرآنية وبراويز", royal:"👑 درة متحفية", desc:"لوحة آية الكرسي بتصميم بيضاوي وإطار مطعم بالصدف.", story:"حفظ وأناقة ربانية.", price:"24.000 د.ك", oldPrice:"28.000 د.ك", stock:"متوفر", featured:"no", image:"36.jpg"},
+  {id:22, name:"برواز سورة الإخلاص", cat:"لوحات قرآنية وبراويز", royal:"👑 درة متحفية", desc:"برواز سورة الإخلاص بإطار خشبي وزخارف صدفية أصيلة.", story:"نور الإخلاص في جدران قصرك.", price:"21.000 د.ك", oldPrice:"25.000 د.ك", stock:"متوفر", featured:"no", image:"37.jpg"},
+  {id:23, name:"ترابيزة مسدسة 3 بوف", cat:"ترابيزات", royal:"👑 درة متحفية", desc:"ترابيزة سفرة مسدسة مع 3 بوف ملحق بتصميم هندسي فريد.", story:"جلسات عائلية بأصالة ملوكية.", price:"62.000 د.ك", oldPrice:"72.000 د.ك", stock:"بالطلب", featured:"no", image:"50.jpg"},
+  {id:24, name:"ترابيزة نجمة 8 بوف", cat:"ترابيزات", royal:"👑 درة متحفية", desc:"ترابيزة كبرى بنقشة النجمة الثمانية مع 8 بوفات دائرية مطعمة.", story:"للضيوف والمجالس الكبرى.", price:"62.000 د.ك", oldPrice:"72.000 د.ك", stock:"بالطلب", featured:"yes", image:"51.jpg"},
+  {id:25, name:"طقم صواني هلال", cat:"صواني تقديم", royal:"👑 درة متحفية", desc:"طقم صواني هلالي مميز بـ 3 مقاسات وتطعيم صدف نقي.", story:"ضيافة تليق بكبار الزوار.", price:"22.000 د.ك", oldPrice:"26.000 د.ك", stock:"متوفر", featured:"no", image:"52.jpg"},
+  {id:26, name:"طقم مبخرة السلطان قايتباي", cat:"مباخر", royal:"👑 درة متحفية", desc:"مبخرة ملكية فاخرة بتصميم تاريخي وتطعيم عرق اللؤلؤ.", story:"عبير الأصالة الشرقية.", price:"15.000 د.ك", oldPrice:"18.000 د.ك", stock:"متوفر", featured:"yes", image:"8.jpg"},
+  {id:27, name:"طقم كوستر الأمير توت", cat:"ديكورات", royal:"👑 درة متحفية", desc:"طقم كوسترات فاخر مطعم بالصدف بتصميم تراثي فرعوني.", story:"لمسة تراثية راقية لطاولتك.", price:"18.500 د.ك", oldPrice:"22.000 د.ك", stock:"متوفر", featured:"no", image:"1.jpg"},
+  {id:28, name:"طقم كوستر الملكة نفرتيتي", cat:"ديكورات", royal:"👑 درة متحفية", desc:"كوسترات تقديم ملكية زخارف صدف طبيعي.", story:"فخامة التفاصيل الصغرى.", price:"16.500 د.ك", oldPrice:"20.000 د.ك", stock:"متوفر", featured:"no", image:"2.jpg"}
+];
+
+let products = JSON.parse(localStorage.getItem('asala_museum_products_v7')) || museumDefaultProducts;
+let siteMedia = JSON.parse(localStorage.getItem('asala_museum_media_v7')) || { logo: 'logo.jpg', heroImg: 'cover.jpg' };
+let storeTexts = JSON.parse(localStorage.getItem('asala_museum_texts_v7')) || { name: "أصالة التراث المصري", slogan: "عاشق ومعشوق — متحف الإنتيك والتحف الملكية الأصيلة ✨ صُنع في مصر" };
+
+let currentCategory = 'الكل';
+let currentSearch = '';
+let currentPage = 1;
+const itemsPerPage = 12;
+let activeProductForOrder = null;
+let tempProductImg = "";
+const waNumber = "96551118069";
+
+function getStockBadge(stockStatus) {
+  if (stockStatus === "متوفر") {
+    return `<span class="badge" style="background:#27ae60;">متوفر</span>`;
+  } else if (stockStatus === "قيد الشحن" || stockStatus === "قيد الشحن (25 يوم)") {
+    return `<span class="badge" style="background:#d35400;">قيد الشحن (25 يوم)</span>`;
+  } else if (stockStatus === "بالطلب" || stockStatus === "بالطلب تفصيل المنتج") {
+    return `<span class="badge" style="background:#8e44ad;">بالطلب تفصيل المنتج</span>`;
+  }
+  return `<span class="badge" style="background:#27ae60;">متوفر</span>`;
+}
+
+function renderAll() {
+  document.getElementById('storeName').textContent = storeTexts.name;
+  document.getElementById('footerName').textContent = storeTexts.name;
+  document.getElementById('sloganText').textContent = storeTexts.slogan;
+  if(siteMedia.logo) document.getElementById('brandLogo').src = siteMedia.logo;
+
+  const featuredGrid = document.getElementById('featuredGrid');
+  const featuredProducts = products.filter(p => p.featured === 'yes');
+  featuredGrid.innerHTML = featuredProducts.map(p => `
+    <div class="product-card" onclick="openProductModal(${p.id})">
+      <div class="product-img">
+        ${p.image ? `<img src="${p.image}" alt="${p.name}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:50px;">🏛️</div>`}
+        ${getStockBadge(p.stock)}
+      </div>
+      <div class="product-info">
+        <span class="royal-tag">${p.royal || '👑 درة متحفية'}</span>
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        <div class="product-price">${p.price}</div>
+        <button class="btn-wa" onclick="event.stopPropagation(); openProductModal(${p.id});">اطلب الآن (يصل خلال 25 يوم)</button>
+      </div>
+    </div>
+  `).join('');
+
+  let filtered = products.filter(p => {
+    let matchCat = currentCategory === 'الكل' || p.cat === currentCategory;
+    let matchSearch = (p.name || '').toLowerCase().includes(currentSearch.toLowerCase()) || (p.desc || '').toLowerCase().includes(currentSearch.toLowerCase());
+    return matchCat && matchSearch;
+  });
+
+  const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
+  if(currentPage > totalPages) currentPage = 1;
+  const start = (currentPage - 1) * itemsPerPage;
+  const paginatedItems = filtered.slice(start, start + itemsPerPage);
+
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = paginatedItems.map(p => `
+    <div class="product-card" onclick="openProductModal(${p.id})">
+      <div class="product-img">
+        ${p.image ? `<img src="${p.image}" alt="${p.name}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:50px;">🏛️</div>`}
+        ${getStockBadge(p.stock)}
+      </div>
+      <div class="product-info">
+        <span class="royal-tag">${p.royal || '👑 درة متحفية'}</span>
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        <div class="product-price">${p.price} ${p.oldPrice ? `<span style="font-size:14px;color:#999;text-decoration:line-through;margin-right:8px">${p.oldPrice}</span>` : ''}</div>
+        <button class="btn-wa" onclick="event.stopPropagation(); openProductModal(${p.id});">اطلب الآن (يصل خلال 25 يوم)</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function setCategory(cat, btn) {
+  currentCategory = cat;
+  currentPage = 1;
+  document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAll();
+}
+
+function filterProducts() {
+  currentSearch = document.getElementById('searchInput').value;
+  currentPage = 1;
+  renderAll();
+}
+
+function openProductModal(id) {
+  const p = products.find(x => x.id === id);
+  if(!p) return;
+  activeProductForOrder = p;
+  
+  const imgCon = document.getElementById('modalImgContainer');
+  imgCon.innerHTML = p.image ? `<img src="${p.image}" alt="${p.name}">` : `<div style="font-size:80px;">🏛️</div>`;
+
+  document.getElementById('modalRoyal').textContent = p.royal || '👑 درة متحفية';
+  document.getElementById('modalTitle').textContent = p.name;
+  document.getElementById('modalDesc').textContent = p.desc;
+  document.getElementById('modalStory').textContent = p.story || '';
+  document.getElementById('modalPrice').textContent = p.price;
+
+  document.getElementById('clientName').value = '';
+  document.getElementById('clientPhone').value = '';
+  document.getElementById('clientAddress').value = '';
+  document.getElementById('productModal').classList.add('open');
+}
+
+function closeModal() { document.getElementById('productModal').classList.remove('open'); }
+
+function submitOrderViaWa() {
+  if(!activeProductForOrder) return;
+  const name = document.getElementById('clientName').value;
+  const phone = document.getElementById('clientPhone').value;
+  const address = document.getElementById('clientAddress').value;
+  const delivery = document.getElementById('clientDelivery').value;
+
+  if(!name || !phone || !address) { alert('يرجى تعبئة كافة بيانات الحيازة!'); return; }
+
+  let statusText = activeProductForOrder.stock;
+  if(statusText === "قيد الشحن") statusText = "قيد الشحن (25 يوم)";
+  if(statusText === "بالطلب") statusText = "بالطلب تفصيل المنتج";
+
+  const msg = `🏛️ *طلب حيازة تحفة متحفية*:\n\n🔹 *التحفة:* ${activeProductForOrder.name}\n💰 *السعر:* ${activeProductForOrder.price}\n📌 *حالة التوفر:* ${statusText}\n🚚 *خيار التوصيل:* ${delivery}\n\n👤 *بيانات العميل:*\n- الاسم: ${name}\n- الهاتف: ${phone}\n- العنوان: ${address}\n\n✨ متحف أصالة التراث المصري - عاشق ومعشوق`;
+  window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+  closeModal();
+}
+
+function openLoginModal() { document.getElementById('loginModal').classList.add('open'); }
+function closeLoginModal() { document.getElementById('loginModal').classList.remove('open'); }
+
+function checkAdminLogin() {
+  const email = document.getElementById('adminEmailInput').value;
+  const pass = document.getElementById('adminPassInput').value;
+  if(email === adminCreds.email && pass === adminCreds.pass) {
+    closeLoginModal();
+    document.getElementById('adminPanelModal').classList.add('open');
+    renderAdminProductsList();
+  } else {
+    alert('البريد أو كلمة المرور غير صحيحة!');
+  }
+}
+function closeAdminPanel() { document.getElementById('adminPanelModal').classList.remove('open'); }
+
+function switchAdminTab(evt, tabId) {
+  document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.admin-tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+
+function handleProductFile(event) {
+  const file = event.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      tempProductImg = e.target.result;
+      document.getElementById('p-image-val').value = tempProductImg;
+      alert('✅ تم رفع صورة التحفة بنجاح!');
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function saveProductData() {
+  const editId = document.getElementById('edit-id').value;
+  const name = document.getElementById('p-name').value;
+  const price = document.getElementById('p-price').value;
+  if(!name || !price) { alert('يرجى إدخال اسم التحفة والسعر!'); return; }
+
+  const customImg = document.getElementById('p-image-val').value;
+
+  const pData = {
+    id: editId ? parseInt(editId) : Date.now(),
+    name: name,
+    cat: document.getElementById('p-cat').value,
+    royal: document.getElementById('p-royal').value || '👑 درة متحفية',
+    desc: document.getElementById('p-desc').value,
+    story: document.getElementById('p-story').value,
+    price: price,
+    oldPrice: document.getElementById('p-old').value,
+    featured: document.getElementById('p-featured').value,
+    image: customImg || tempProductImg || '',
+    stock: document.getElementById('p-stock').value
+  };
+
+  if(editId) {
+    const index = products.findIndex(p => p.id === parseInt(editId));
+    if(index !== -1) {
+      if(!pData.image) pData.image = products[index].image;
+      products[index] = pData;
+    }
+  } else {
+    products.unshift(pData);
+  }
+
+  localStorage.setItem('asala_museum_products_v7', JSON.stringify(products));
+  renderAll();
+  renderAdminProductsList();
+  resetForm();
+  alert('✅ تم حفظ التحفة في المتحف بنجاح!');
+}
+
+function editProduct(id) {
+  const p = products.find(x => x.id === id);
+  if(!p) return;
+  document.getElementById('edit-id').value = p.id;
+  document.getElementById('p-name').value = p.name;
+  document.getElementById('p-cat').value = p.cat;
+  document.getElementById('p-royal').value = p.royal || '';
+  document.getElementById('p-desc').value = p.desc || '';
+  document.getElementById('p-story').value = p.story || '';
+  document.getElementById('p-price').value = p.price || '';
+  document.getElementById('p-old').value = p.oldPrice || '';
+  document.getElementById('p-featured').value = p.featured || 'no';
+  document.getElementById('p-stock').value = p.stock || 'متوفر';
+  document.getElementById('p-image-val').value = p.image || '';
+  tempProductImg = p.image || '';
+}
+
+function resetForm() {
+  document.getElementById('edit-id').value = '';
+  document.getElementById('p-name').value = '';
+  document.getElementById('p-price').value = '';
+  document.getElementById('p-old').value = '';
+  document.getElementById('p-desc').value = '';
+  document.getElementById('p-story').value = '';
+  document.getElementById('p-file').value = '';
+  document.getElementById('p-image-val').value = '';
+  tempProductImg = "";
+}
+
+function renderAdminProductsList() {
+  document.getElementById('prodCount').textContent = products.length;
+  document.getElementById('tabProdBadge').textContent = products.length;
+  const list = document.getElementById('adminProductsList');
+  list.innerHTML = products.map((p) => `
+    <div class="admin-product-row">
+      <div><b>🏛️ ${p.name}</b> — <span style="color:var(--wine); font-weight:bold;">${p.price}</span> (${p.stock})</div>
+      <div>
+        <button class="btn-edit" onclick="editProduct(${p.id})">✏️ تعديل</button>
+        <button class="btn-danger" onclick="deleteProduct(${p.id})">🗑️ حذف</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function deleteProduct(id) {
+  if(confirm('هل أنت متأكد من حذف هذه التحفة؟')) {
+    products = products.filter(p => p.id !== id);
+    localStorage.setItem('asala_museum_products_v7', JSON.stringify(products));
+    renderAll();
+    renderAdminProductsList();
+  }
+}
+
+function uploadHeroImage(event) {
+  const file = event.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      siteMedia.heroImg = e.target.result;
+      localStorage.setItem('asala_museum_media_v7', JSON.stringify(siteMedia));
+      alert('🖼️ تم رفع غلاف المتحف!');
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function uploadLogoFile(event) {
+  const file = event.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      siteMedia.logo = e.target.result;
+      localStorage.setItem('asala_museum_media_v7', JSON.stringify(siteMedia));
+      renderAll();
+      alert('🏺 تم تحديث شعار المتحف!');
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function saveStoreIdentity() {
+  storeTexts.name = document.getElementById('editStoreName').value;
+  localStorage.setItem('asala_museum_texts_v7', JSON.stringify(storeTexts));
+  renderAll();
+  alert('✅ تم حفظ الهوية!');
+}
+
+function exportDataFile() {
+  const data = { products: products, media: siteMedia, texts: storeTexts };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `asala_museum_data_${Date.now()}.json`;
+  a.click();
+}
+
+function importDataFile(event) {
+  const file = event.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const imported = JSON.parse(e.target.result);
+        if(imported.products) products = imported.products;
+        localStorage.setItem('asala_museum_products_v7', JSON.stringify(products));
+        renderAll();
+        renderAdminProductsList();
+        alert('✅ تم الاستيراد بنجاح!');
+      } catch(err) { alert('ملف غير صالح!'); }
+    };
+    reader.readAsText(file);
+  }
+}
+
+document.getElementById('yearSpan').textContent = new Date().getFullYear();
+document.addEventListener('DOMContentLoaded', renderAll);
+</script>
+
+</body>
+</html>
